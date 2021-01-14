@@ -1,0 +1,125 @@
+<style>
+    label{font-size: 50px;
+          display: flex;
+          align-items: center;
+          font-weight: 700;
+          letter-spacing: 4px;}
+
+    .texttt{
+        font-size: 20px;
+        text-align: center;
+    }
+    .textttt{
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .boxxx{
+        padding:16px;
+        float: left;
+        border:3px solid rgb(71, 71, 71);
+        height:145px;
+        width:145px;
+    }
+</style>
+
+<div class="container" style="margin-top: 3%;">
+    <div class="row">
+        <div class="" style="width:300px;">
+            <label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    class="bi bi-chat-square-text-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
+                </svg>
+                &nbsp;會議列表
+            </label>
+        </div>
+        <div style="margin-left: 3%;">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active " 
+                    aria-current="page" href="/" style="font-size:35px;">參與</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active " href="/chair" 
+                    style="font-size:35px;">主持</a>
+                </li>
+            </ul>
+        </div>
+        <div class="text-right" style="padding-top: 10px; margin-left:30px">
+            <a href="" class="w3-button w3-round-xlarge w3-blue w3-xlarge" data-toggle="modal" 
+            data-target="#NewMeetingModal">&#10010;
+                舉辦會議
+            </a>
+        </div>
+    </div>
+</div>
+{{#each confsData}}
+<div class="w3-panel w3-round-xlarge " style="padding:16px; border:5px solid rgb(71, 71, 71); margin-left:3%; margin-right:3%">
+    <div style="float: left;" class="w3-panel">
+        <p onclick="tableClick('{{this.confData._id}}')"
+        style="font-size:55px; font-weight:bold;">{{this.confData.name}}&nbsp;&nbsp;&nbsp;
+        {{#allowJoinMeeting this.confData.isChairSign this.confData.isRoomSign this.confData.startTime this.confData.endTime this.confData.meetingURL}}
+            <button onclick="location.href='{{{this.confData.meetingURL}}}'" 
+            type="button" class="w3-button w3-round-xlarge w3-blue"
+            >加入會議</button>
+            {{else}}
+            <button disabled type="button" class="w3-button w3-round-xlarge w3-blue"
+            >加入會議</button>
+            {{/allowJoinMeeting}}</P>
+        <p  onclick="tableClick('{{this.confData._id}}')"
+        style="font-size:30px;">開始時間：{{this.confData.startTime}}</p>
+        <p  onclick="tableClick('{{this.confData._id}}')"
+        style="font-size:30px;">結束時間：{{this.confData.endTime}}</p>
+        <p  onclick="tableClick('{{this.confData._id}}')"
+            style="font-size:30px;">地點：{{this.confRoomData.name}}
+            
+        </p>
+    </div>
+    <div style="width:320px; float:right; margin-left:20px">
+        <div class="w3-round-xlarge w3-container boxxx" style="margin-right: 16px; margin-bottom:16px">
+            <p class="texttt">參與身分</p>
+            <p class="textttt" onclick="tableClick('{{this.confData._id}}')"
+            >{{{getAttendType this.attendData.attendType}}}</p>
+        </div>
+        <div class="w3-round-xlarge w3-container boxxx" style="margin-bottom:16px">
+            <p class="texttt">與會模式</p>
+            <p class="textttt" onclick="tableClick('{{this.confData._id}}')"
+            >{{#getAttendMode this.attendData.attendMode}}{{/getAttendMode}}</p>
+        </div>
+        <div class="w3-round-xlarge w3-container boxxx" style="margin-right: 16px;" >
+            <p class="texttt">主持人審核</p>
+            <p class="textttt" onclick="tableClick('{{this.confData._id}}')"
+            >{{{getSign this.confData.isChairSign}}}</p>
+        </div>
+        <div class="w3-round-xlarge w3-container boxxx">
+            <p class="texttt">場地審核</p>
+            <p class="textttt" onclick="tableClick('{{this.confData._id}}')"
+            >{{{getSign this.confData.isRoomSign}}}</p>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+<div class="w3-container">
+    <div style="margin-bottom :7%">
+        <div style="margin:0 5%; text-align: center">
+            {{!-- 判斷有無會議 --}}
+            {{#if confsData}}
+            {{else}}
+            {{!-- 沒有會議 --}}
+            <p style="font-size: 45px;">尚無會議!!!</p>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<script>
+    function creatURL(){
+        var murl = window.location.origin + "/meeting.html?mid=" +  (new Date()).getTime();
+        alert(murl);
+        window.location.assign(murl);
+    }
+</script>
+{{>newConfModal}}

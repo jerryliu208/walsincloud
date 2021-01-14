@@ -1,0 +1,107 @@
+[
+    {
+        "staffId": "1100101",
+        "name": "王大",
+        "position": "人事部經理",
+        "email": "wangone@walsincloud.com.xx",
+        "password": "0101"
+    },
+    {
+        "staffId": "1100102",
+        "name": "王二",
+        "position": "人事部主任",
+        "email": "wangtwo@walsincloud.com.xx",
+        "password": "0102"
+    },
+    {
+        "staffId": "1100103",
+        "name": "王三",
+        "position": "人事部職員",
+        "email": "wangthree@walsincloud.com.xx",
+        "password": "0103"
+    },
+    {
+        "staffId": "1100201",
+        "name": "張一一",
+        "position": "業務部經理",
+        "email": "zhangnine@walsincloud.com.xx",
+        "password": "0201"
+    },
+    {
+        "staffId": "1100202",
+        "name": "張二二",
+        "position": "業務部主任",
+        "email": "chenseven@walsincloud.com.xx",
+        "password": "0202"
+    },
+    {
+        "staffId": "1100203",
+        "name": "張三三",
+        "position": "業務部職員",
+        "email": "chenyiji@walsincloud.com.xx",
+        "password": "0203"
+    },
+    {
+        "staffId": "1100301",
+        "name": "陳甲",
+        "position": "財務部經理",
+        "email": "chenbingji@walsincloud.com.xx",
+        "password": "0301"
+    },
+    {
+        "staffId": "1100302",
+        "name": "陳乙",
+        "position": "財務部主任",
+        "email": "linsix@walsincloud.com.xx",
+        "password": "0302"
+    },
+    {
+        "staffId": "1100303",
+        "name": "陳丙",
+        "position": "財務部專員",
+        "email": "lingseven@walsincloud.com.xx",
+        "password": "0303"
+    },
+    {
+        "staffId": "1100401",
+        "name": "林子",
+        "position": "資訊部經理",
+        "email": "lingthree@walsincloud.com.xx",
+        "password": "0401"
+    },
+    {
+        "staffId": "1100402",
+        "name": "林丑",
+        "position": "資訊部主任",
+        "email": "lingthree@walsincloud.com.xx",
+        "password": "0402"
+    },
+    {
+        "staffId": "1100403",
+        "name": "林寅",
+        "position": "資訊部職員",
+        "email": "lingthree@walsincloud.com.xx",
+        "password": "0403"
+    },
+    {
+        "staffId": "1100403",
+        "name": "林寅",
+        "position": "資訊部職員",
+        "email": "lingthree@walsincloud.com.xx",
+        "password": "0403"
+    },
+    {
+        "staffId": "1109999",
+        "name": "焦佑倫",
+        "position": "董事長",
+        "email": "9999@walsincloud.com.xx",
+        "password": "9999"
+    },
+    {
+        "staffId": "1108888",
+        "name": "䡯京李",
+        "position": "總經理",
+        "email": "8888@walsincloud.com.xx",
+        "password": "8888"
+    }
+]

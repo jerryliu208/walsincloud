@@ -1,0 +1,278 @@
+<div class="container" style="margin-top: 3%;">
+    <div class="row">
+        <div class="col">
+            <label style="font-size: 20px; display: flex; align-items: center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chat-square-text-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
+                </svg>
+                &nbsp;<a href="/">會議列表</a>&nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                </svg>
+                &nbsp;{{confInfo.name}}
+            </label>
+            {{!-- 顯示 flash 訊息 --}}
+            {{> message }}
+        </div>
+
+        <div class="col text-right">
+            {{!-- 與會者選擇與會模式，後端判斷使用者身分 --}}
+            {{#if identity.isAttendee}}
+            {{!-- 依據會議簽核狀態判斷與會者可否選擇與會模式 --}}
+            {{#allowChooseMode chairSign.isSign roomSign.isSign}}
+            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#ModeModal">與會模式</a>
+            {{else}}
+            <a href="#" class="btn btn-danger btn-sm disabled" data-toggle="modal" data-target="#ModeModal">與會模式</a>
+            {{/allowChooseMode}}
+            {{/if}}
+
+            {{!-- 空間負責人簽核使用空間，後端判斷使用者身分 --}}
+            {{#if identity.isRoomManager}}
+            {{!-- 依據會議簽核狀態判斷空間負責人可否簽核 --}}
+            {{#allowRoomSign chairSign.isSign roomSign.isSign}}
+            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#PlaceModal">場地簽核</a>
+            {{else}}
+            <a href="#" class="btn btn-danger btn-sm disabled" data-toggle="modal" data-target="#PlaceModal">場地簽核</a>
+            {{/allowRoomSign}}
+            {{/if}}
+
+            {{!-- 主持人簽核使用空間，後端判斷使用者身分 --}}
+            {{#if identity.isChair}}
+            {{!-- 依據會議簽核狀態判斷主持人可否簽核 --}}
+            {{#allowChairSign chairSign.isSign}}
+            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#CheckModal">主持人簽核</a>
+            {{else}}
+            <a href="#" class="btn btn-danger btn-sm disabled" data-toggle="modal" data-target="#CheckModal">主持人簽核</a>
+            {{/allowChairSign}}
+            {{/if}}
+
+            <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#CostModal" id="costcalculate"
+                onclick="costCalculate({{confInfo.cost.laborCost}},{{confInfo.cost.roomCost}})">成本估計</a>
+            <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#FileModal">會議記錄</a>
+
+            {{!-- 會議建立者可編輯會議，後端判斷使用者身分 --}}
+            {{#if identity.isOrganizer}}
+            {{!-- 依據會議簽核狀態判斷目前的會議可否編輯 --}}
+            {{#allowEdit chairSign.isSign roomSign.isSign}}
+            <button class="btn btn-outline-primary btn-sm" type="button" id="openedit">編輯</button>
+            <a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#DeleteModal">刪除</a>
+            {{else}}
+            <button class="btn btn-primary btn-sm" type="button" id="openedit" disabled>編輯</button>
+            <a href="#" class="btn btn-danger btn-sm disabled" data-toggle="modal" data-target="#DeleteModal">刪除</a>
+            {{/allowEdit}}
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<div class="w3-container">
+    <div style="margin:0 5% 3%">
+        <form action="" method="POST" name="createConfForm" style="background:#f5f5f5; padding:1% 1%"
+            onsubmit="return checkCreateForm()">
+
+            <div class="row" style="width: 100%; margin:0 auto;padding:1% 2%">
+                <div class="col-sm">
+                    <label>會議名稱：</label>
+                    {{!-- 如果主持人已簽核，但使用空間被駁回 -> 會議名稱不能更改 --}}
+                    {{#allowEditOther chairSign.isSign roomSign.isSign}}
+                    <input type="text" class="form-control edit" id="meetingname" value="{{../confInfo.name}}"
+                        name="name" required disabled>
+                    {{else}}
+                    <input type="text" class="form-control" id="meetingname" value="{{../confInfo.name}}" name="name"
+                        required disabled>
+                    {{/allowEditOther}}
+                </div>
+                <div class="col-sm">
+                    <label for="">建立者：</label>
+                    <input type="text" class="form-control" id="createUser" value="{{organizer}}" disabled>
+                </div>
+            </div>
+            <div class="row" style="width: 100%;margin: 0 auto;padding:1% 2%">
+                <div class="col-sm">
+                    <label>開始時間：</label>
+                    {{!-- 如果主持人已簽核，但使用空間被駁回 -> 開始時間不能更改 --}}
+                    {{#allowEditOther chairSign.isSign roomSign.isSign}}
+                    <input type="datetime-local" class="form-control edit" id="starttime"
+                        value="{{../confInfo.displayStartTime}}" name="startTime" required disabled>
+                    {{else}}
+                    <input type="datetime-local" class="form-control" id="starttime"
+                        value="{{../confInfo.displayStartTime}}" name="startTime" required disabled>
+                    {{/allowEditOther}}
+                </div>
+                <div class="col-sm">
+                    <label>結束時間：</label>
+                    {{!-- 如果主持人已簽核，但使用空間被駁回 -> 結束時間不能更改 --}}
+                    {{#allowEditOther chairSign.isSign roomSign.isSign}}
+                    <input type="datetime-local" class="form-control edit" id="endtime"
+                        value="{{../confInfo.displayEndTime}}" name="endTime" required disabled>
+                    {{else}}
+                    <input type="datetime-local" class="form-control" id="endtime"
+                        value="{{../confInfo.displayEndTime}}" name="endTime" required disabled>
+                    {{/allowEditOther}}
+                </div>
+            </div>
+            <div class="row" style="width: 100%;margin: 0 auto;padding:1% 2%">
+                <div class="col-sm">
+                    <label for="employeeList">主持人編號：</label>
+                    {{!-- 如果主持人已簽核，但使用空間被駁回 -> 主持人不能更改 --}}
+                    {{#allowEditOther chairSign.isSign roomSign.isSign}}
+                    <input class="form-control edit" list="staffList" value="{{../confInfo.chairId}}" name="chairId"
+                        required disabled>
+                    {{else}}
+                    <input class="form-control" list="staffList" value="{{../confInfo.chairId}}" name="chairId" required
+                        disabled>
+                    {{/allowEditOther}}
+                    <datalist id="staffList">
+                        {{!-- 遍歷使用者陣列 --}}
+                        {{#each users}}
+                        <option value="{{this.staffId}}">{{this.name}}</option>
+                        {{/each}}
+                    </datalist>
+                </div>
+                <div class="col-sm">
+                    <label>地點：</label>
+                    <select class="form-control edit" name="roomId" required disabled>
+                        {{!-- 遍歷新空間陣列 --}}
+                        {{#each confRooms}}
+                        {{!-- 若使用空間的id跟目前遍歷到的新空間id相同->將其設為預設值(selected) --}}
+                        {{#equal this._id ../roomInfo._id}}
+                        <option value="{{../roomInfo._id}}" selected>{{../roomInfo.name}}</option>
+                        {{else}}
+                        <option value="{{this._id}}">{{this.name}}</option>
+                        {{/equal}}
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="width: 100%;margin: 0 auto;padding:1% 2%">
+                <div class="col-sm">
+                    <label>主題議程：</label>
+                    {{!-- 如果主持人已簽核，但使用空間被駁回 -> 主題議程不能更改 --}}
+                    {{#allowEditOther chairSign.isSign roomSign.isSign}}
+                    <textarea class="form-control edit" id="theme" name="topic" required
+                        disabled>{{../confInfo.topic}}</textarea>
+                    {{else}}
+                    <textarea class="form-control" id="theme" name="topic" required
+                        disabled>{{../confInfo.topic}}</textarea>
+                    {{/allowEditOther}}
+                </div>
+            </div>
+            <div class="row" style="width: 100%; margin: 0 auto; padding:1% 2%">
+                <div class="col-sm">
+                    <div class="row">
+                        <div class="col">
+                            <label>與會人員：</label>
+                        </div>
+                        <div class="col text-right">
+                            {{!-- 如果主持人已簽核，但使用空間被駁回 -> 與會人員不能更改 --}}
+                            {{#allowEditOther chairSign.isSign roomSign.isSign}}
+                            <button type="button" class="btn btn-outline-primary btn-sm addbtn" id="addattend">
+                                <span aria-hidden="true">新增&#43;</span>
+                            </button>
+                            {{else}}
+                            <button type="button" class="btn btn-outline-primary btn-sm addbtn" id="addattend" disabled>
+                                <span aria-hidden="true">新增&#43;</span>
+                            </button>
+                            {{/allowEditOther}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="text-align: center;">
+                <table class="table table-hover" style="background: #fffffe; background-size:auto; margin:0 4%">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">與會者</th>
+                            <th scope="col">參與身分</th>
+                            <th scope="col">與會模式</th>
+                            <th scope="col" class="addbtn">刪除</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="attendeelist">
+                        {{!-- 遍歷會議參與者陣列 --}}
+                        {{#each attendeeList}}
+                        <tr class="attendee" id="delattendee">
+                            <th scope="row">
+                                {{!-- 如果主持人已簽核，但使用空間被駁回 -> 與會人員不能更改 --}}
+                                {{#allowEditOther ../chairSign.isSign ../roomSign.isSign}}
+                                <input class="form-control edit" list="employeeList" name="attendees"
+                                    value="{{../this.attendee.staffId}}" required disabled>
+                                {{else}}
+                                <input class="form-control" list="employeeList" name="attendees"
+                                    value="{{../this.attendee.staffId}}" required disabled>
+                                {{/allowEditOther}}
+
+                                <datalist id="employeeList">
+                                    {{!-- 遍歷使用者陣列 --}}
+                                    {{#each ../users}}
+                                    <option value="{{this.staffId}}&ensp;&ensp;&ensp;{{this.staffId}}&ensp;&ensp;&ensp;{{this.position}}"></option>
+                                    {{/each}}
+                                </datalist>
+                            </th>
+
+                            <td>
+                                {{!-- 如果主持人已簽核，但使用空間被駁回 -> 與會人員的與會模式不能更改 --}}
+                                {{#allowEditOther ../chairSign.isSign ../roomSign.isSign}}
+                                <select class="form-control edit" name="attendTypes" required disabled>
+                                {{else}}
+                                <select class="form-control" name="attendTypes" required disabled>
+                                    {{/allowEditOther}}
+                                    <option value="{{this.attendee.attendType}}" selected>
+                                            {{getAttendType this.attendee.attendType}}
+                                    </option>
+                                    {{!-- 取得另外一個選項 --}}
+                                    {{#getAnotherType this.attendee.attendType}}{{/getAnotherType}}
+                                 </select>
+                            </td>
+                            
+                            <td valign="middle">
+                                {{#getAttendMode this.attendee.attendMode}}{{/getAttendMode}}
+                            </td>
+                            <td class="addbtn">
+                                {{!-- 第一個與會者不要有刪除的按鈕 --}}
+                                {{#if this.isFirst}}
+                                {{!-- <button type="button" class="btn btn-outline-warning btn-sm edit deleteattend"
+                                    disabled>
+                                    <span aria-hidden="true">&#10006;</span>
+                                </button> --}}
+                                {{else}}
+                                {{#allowEditOther ../chairSign.isSign ../roomSign.isSign}}
+                                <button type="button" class="btn btn-outline-warning btn-sm edit deleteattend" disabled>
+                                    <span aria-hidden="true">&#10006;</span>
+                                </button>
+                                {{else}}
+                                <button type="button" class="btn btn-outline-warning btn-sm deleteattend" disabled>
+                                    <span aria-hidden="true">&#10006;</span>
+                                </button>
+                                {{/allowEditOther}}
+                                {{/if}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row" style="width: 100%;margin: 0 auto;padding:1% 2%;">
+                <div class="col-sm">
+                    <div style="text-align: right">
+                        {{!-- 按取消->返回會議資訊沒有被編輯的狀態 --}}
+                        <a class="btn btn-outline-secondary addbtn" href="/confInfo?id={{confInfo._id}}"
+                            id="backbtn">取消</a>
+                        <button class="btn btn-outline-danger addbtn" type="submit" value='變更欄位為可用'
+                            id="savebtn">保存</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{{>infoModal}}

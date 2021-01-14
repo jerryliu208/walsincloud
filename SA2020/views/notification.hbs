@@ -1,0 +1,51 @@
+<style>
+    tbody{color:black;}
+</style>
+{{!-- 會議通知中心內容--}}
+<div class="container" style="margin-top: 3%;">
+    <div class="row">
+        <div class="col">
+            <label style="font-size: 20px; display: flex; align-items: center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-bell-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
+                </svg>
+                &nbsp;會議通知列表
+            </label>
+        </div>
+    </div>
+</div>
+
+<div class="w3-container">
+    <div>
+        <div style="margin: 0 5%;">
+            <table class="table conf-table">
+                <thead>
+                    <tr>
+                        <th scope="col">主旨</th>
+                        <th scope="col" class="text-center">寄件者</th>
+                        <th scope="col" class="text-center">傳送時間</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    {{!-- 遍歷通知陣列 --}}
+                    {{#each notice}}
+                        {{!--每項通知--}}
+                        {{#whichNoticification this.isCheck this.mode this.confId this.confInfo.name this.sender.name this.sendTime this._id}}
+                        {{/whichNoticification}}
+                    {{/each}}
+                </tbody>
+
+            </table>
+            {{!-- 判斷有無通知 --}}
+            {{#if notice}}
+            {{else}}
+            {{!-- 沒有通知 --}}
+            <p class="text-center">目前沒有通知</p>
+            {{/if}}
+        </div>
+    </div>
+</div>
+

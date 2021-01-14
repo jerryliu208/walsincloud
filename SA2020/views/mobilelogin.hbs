@@ -1,0 +1,73 @@
+{{!-- 登入--}}
+<style>
+    body{background-color: rgb(230, 230, 230);}
+
+    .btn{color: rgb(255, 255, 255);
+         font-size: 30px;
+         background-color: rgb(0, 0, 0);
+         height: 60px;
+         width:150px;
+         border-radius: 15px;
+         text-align: center;
+         display: inline-block;
+         cursor: grab;
+         margin-top: 5%;
+         }
+    .btn:hover{color: rgba(203, 22, 22, 0.762);
+               background-color: rgb(121, 222, 121);}
+    
+    .form-control{width:250px;
+                  height: auto;
+                  margin-left: auto;
+                  margin-right: auto;
+                  border-color: rgb(253, 253, 253);
+                  border-width: 4px;
+                 }
+    h1{margin:5% 0 0 0; 
+       font-size:50px; 
+       font-style:italic;
+       font-weight: bolder;
+       padding: 5px;
+    }
+    img{}
+</style>
+
+
+<div style=" text-align: center">
+    <div style="">
+        <div style="justify-content:center;">
+            <div class="information" style="margin-top:10%">
+                <div style="padding: 3%">
+
+                    <img src="../asset/cloud.jpg" style="width: 65%;">
+                    
+                </div>
+                {{!-- 顯示 flash 訊息 --}}
+                {{> message }}
+                
+                <div style="margin:30px 10px 300px 10px; border:auto">
+                    {{!-- 登入資料輸入後端，判別會員資格 --}}
+                    <form method="POST" action="/users/login">
+                        <div style="padding:1%; font-size:36pt; font-weight:bold;">
+                            <label>帳號</label>
+                            <div>
+                                <input style="width:500px; font-size:28pt; text-align:center;" type="text" id="account" name="staffId" required>
+                            </div>
+                            
+                        </div>
+
+                        <div style="padding:1%; font-size:36pt;font-weight:bold;">
+                            <label>密碼</label>
+                            <div>
+                                <input style="width:500px; font-size:28pt; text-align:center;" type="password" id="password" name="password" required>
+                            </div>
+                        </div>
+                        <div>
+                            <input style="width:250px; height:80px; font-size:28pt; margin-top:50px;"class="w3-button w3-round-xxlarge w3-black" type="submit" value="登入">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

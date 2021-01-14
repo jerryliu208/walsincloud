@@ -1,0 +1,115 @@
+<style>
+     .header-right{font-size: 10px;
+                   font-weight: bold;
+                   color: rgb(86, 165, 189);}
+
+     .btn-sm{font-size: 15px;
+             color:rgb(23, 14, 150);}
+             
+     .btn-sm:hover{cursor: grab;}
+
+     body{background-color: rgb(218, 218, 218);}
+
+
+     .w3-bar-item{font-size:25px;
+                  color:rgb(204, 68, 14);
+                  margin-left: 10%;
+                  }
+    nav{background-color: rgb(205, 205, 205);}
+
+    .logo{font-size: 35px;
+          color: rgb(60, 104, 191);
+          font-weight: 700;
+          letter-spacing: 4px;
+          margin-left: 0px;}
+    .imglogo{
+       margin-right:0px;
+       margin-left: 0px;
+       padding:0px;
+       width: 4%;
+    }
+
+    a{font-size: 25px;
+          color: rgb(47, 39, 39);
+          font-weight: 600;
+          letter-spacing:3px;
+          padding: 1px;
+          margin-left: 0px;}
+
+    .nav-name{font-size: 17px;
+              padding: 6px;
+              margin-right: 1px;
+              color: rgb(233, 142, 24);}
+</style>
+
+<nav class="navbar shadow-sm .bg-white">
+  
+    <img src="../asset/cloudonly.png" class="imglogo">
+    <a href="/"><div class="logo">華新雲平台</div></a>
+
+
+{{#if isAuthenticated}}
+
+        <a href="/" class="" style="display: flex; align-items: center; ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-text"
+            viewBox="0 0 16 16">
+            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+            <path fill-rule="evenodd" d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+        </svg>
+        &nbsp;
+        會議列表
+       </a>
+    
+       <a href="/sign" class="" style="display: flex; align-items: center;">
+         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-check"
+            viewBox="0 0 16 16">
+            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+            <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+         </svg>
+         &nbsp;
+         待核准會議
+       </a>
+
+       <a href="/notice" class=" " style="display: flex; align-items: center;">
+         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell"
+            viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
+            <path fill-rule="evenodd"
+                d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+         </svg>
+         &nbsp;
+         通知中心&nbsp;&nbsp;
+         {{!-- 如果有未讀的通知，顯示未讀通知的數量 --}}
+         {{#if noticeNum}}
+         <span class="badge bg-danger" style="color: #ffffff; padding:3px">{{noticeNum}}</span>
+         {{/if}}
+        </a>
+
+        <a href="/calendar" class="" style="display: flex; align-items: center;">
+         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-check"
+            viewBox="0 0 16 16">
+            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+            <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+         </svg>
+         &nbsp;
+         我的行事曆
+       </a>
+
+{{/if}}  
+
+            {{!-- 判斷有無登入 --}}
+            {{!-- 有登入->顯示使用者名稱跟登出鈕 --}}
+           <div class="nav-name">
+                {{#if isAuthenticated}}
+                 Hi, {{name}} &emsp;
+                 {{!-- <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">登出</button> --}}
+                 <a class="btn btn-outline-primary btn-sm" href="/users/logout">登出</a>
+                 {{/if}}
+                 {{!-- 沒登入->不顯示 --}}
+            </div>
+          
+</nav>
+

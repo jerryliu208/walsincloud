@@ -1,0 +1,349 @@
+{{!-- 成本估算視窗 --}}
+<div class="modal fade" id="CostModal" tabindex="-1" role="dialog" aria-labelledby="CostModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Cost">會議成本估計</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <span id="peoplecost"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">返回</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{!-- 選擇與會模式視窗 --}}
+<div class="modal fade" id="ModeModal" tabindex="-1" role="dialog" aria-labelledby="ModeModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Mode"> 請選擇參與會議的模式</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/sign/attendMode?id={{confInfo._id}}" method="POST">
+                <div class="modal-body">
+
+                    <div class="row-1">
+                        <div class="col-sm form-check">
+                            <input class="form-check-input" type="radio" name="attendmode" value="1" id="atRoom">
+                            <label for="atRoom">在場</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input class="form-check-input" type="radio" name="attendmode" value="2" id="online">
+                            <label for="online">線上</label>
+                        </div>
+                        <div class="col-sm form-check">
+                            <input class="form-check-input" type="radio" name="attendmode" value="3" id="outline">
+                            <label for="outline">離線</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">送出</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{!-- 主持人簽核視窗 --}}
+<div class="modal fade" id="CheckModal" tabindex="-1" role="dialog" aria-labelledby="CheckModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Check">是否核准本會議？</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/sign/chair?id={{confInfo._id}}" method="POST">
+                <div class="modal-body">
+                    <div class="col-sm form-check">
+                        <input class="form-check-input" type="radio" name="isSign" value="1" id="isChairSign" checked>
+                        <label for="isChairSign">核准</label>
+                    </div>
+                    <div class="col-sm form-check">
+                        <input class="form-check-input" type="radio" name="isSign" id="notChairSign" value="2">
+                        <label for="notChairSign">駁回</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">送出</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{!-- 場地簽核視窗 --}}
+<div class="modal fade" id="PlaceModal" tabindex="-1" role="dialog" aria-labelledby="PlaceModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content container">
+            <div class="modal-header" style="margin-bottom: 10px;">
+                <h5 class="modal-title" id="Check">是否核准場地使用權？</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row" style="margin-bottom: 10px;">
+                <div class="col">
+                    <label>地點：</label>
+                    <input type="text" class="form-control"  value="{{roomInfo.name}}" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label>開始時間：</label>
+                    <input type="text" class="form-control" value="{{confInfo.fulldisplayStartTime}}" disabled>
+                </div>
+                <div class="col-sm-6">
+                    <label>結束時間：</label>
+                    <input type="text" class="form-control" value="{{confInfo.fulldisplayEndTime}}" disabled>
+
+                </div>
+            </div>
+            <form action="/sign/room?id={{confInfo._id}}" method="POST">
+                <div class="modal-body">
+                    <div class="col-sm form-check">
+                        <input class="form-check-input" type="radio" name="isRoomSign" value="1" id="isRoomSign"
+                            checked>
+                        <label for="isRoomSign">核准</label>
+                    </div>
+                    <div class="col-sm form-check">
+                        <input class="form-check-input" type="radio" name="isRoomSign" value="2" id="notRoomSign">
+                        <label for="notRoomSign">駁回</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">送出</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{!-- 檔案視窗 --}}
+<div class="modal fade bd-example-modal-lg" id="FileModal" tabindex="-1" role="dialog" aria-labelledby="FileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="File">會議記錄</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row" style="display: flex; align-items: center">
+                        <div class="col" style="font-size: 18px;">
+                            <label for="" id="File" style="display: flex; align-items: center;">檔案列表</label>
+                        </div>
+                        <div class="col text-right">
+                            <form action="/file/upload?id={{confInfo._id}}" method="POST" enctype="multipart/form-data"
+                                id="uploadMinute">
+
+                                <label class="btn btn-sm btn-info" id="upload-file" style="margin-bottom: 0px;">
+                                    <input id="upload_file" style="display: none;" type="file"
+                                        accept="application/msword,application/vnd.ms-powerpoint,.pptx,application/pdf,text/plain,.jpg,.png"
+                                        name="confFile" onchange="autoSubmit()">
+                                    <i class="fa fa-photo"
+                                        style="margin: 0; display: flex; align-items: center; font-style:normal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
+                                            <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z" />
+                                            <path fill-rule="evenodd"
+                                                d="M8 12a.5.5 0 0 0 .5-.5V7.707l1.146 1.147a.5.5 0 0 0 .708-.708l-2-2a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L7.5 7.707V11.5a.5.5 0 0 0 .5.5z" />
+                                        </svg>&nbsp;上傳檔案
+                                    </i>
+                                </label>
+                                {{!-- 上傳後會自動觸發submit，將檔案上傳 --}}
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <table class="table table-hover" style="background:#fffffe; background-size:auto;">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" style="width: 80%;">檔案名稱</th>
+                                    <th scope="col" style="width: 20%;">刪除</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{!-- 遍歷會議記錄陣列 --}}
+                                {{#each minutes}}
+                                <tr class="" >
+                                    <th scope="row" class="th-item" onclick="clickTh('{{this.name}}','{{this.path}}')">
+                                        {{this.name}}
+                                    </th>
+                                    <td>
+                                        {{!-- 會議建立者可以刪除檔案，判斷使用者身分 --}}
+                                        {{#if ../identity.isOrganizer}}
+                                        <a href="/file/delete?confId={{../confInfo._id}}&fileId={{this._id}}"
+                                            class="btn btn-outline-danger btn-sm deleteemail"><span
+                                                aria-hidden="true">&#10006;</span></a>
+                                        {{else}}
+                                        <button type="button" class="btn btn-outline-secondary btn-sm deleteemail"
+                                            disabled>
+                                            <span aria-hidden="true">&#10006;</span>
+                                        </button>
+                                        {{/if}}
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        {{!-- 判斷有無檔案 --}}
+                        {{#if minutes}}
+                        {{else}}
+                        {{!-- 沒有檔案 --}}
+                        <div class="col text-center">
+                            尚無檔案
+                        </div>
+                        {{/if}}
+
+                    </div>
+
+                </div>
+
+                <div class="container" style="margin-top: 25px;">
+                    <div class="row" style="display: flex; align-items: center">
+                        <div class="col" style="font-size: 18px;">
+                            <label for="" id="File">通知列表</label>
+                        </div>
+                        <div class="col text-right">
+                            {{!-- 會議建立者可以新增要通知的員工，判斷使用者身分 --}}
+                            {{#if identity.isOrganizer}}
+                            <a href="#" class="btn btn-info btn-sm" id="addemail">&#10010; 新增</a>
+                            {{else}}
+                            <button type="button" class="btn btn-info btn-sm" id="addemail" disabled>
+                                <span aria-hidden="true">&#10010; 新增</span>
+                            </button>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="row ">
+
+                        <form action="/file/sendNotice/{{confInfo._id}}" method="POST" style="width: 100%;">
+                            <table class="table table-hover" style="background:#fffffe; background-size:auto; ">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">員工編號</th>
+                                        <th scope="col">刪除</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="emaillist">
+                                    {{!-- 會議建立者可以選擇要通知的員工，判斷使用者身分 --}}
+                                    {{#if identity.isOrganizer}}
+                                    {{!-- 遍歷參與者陣列 --}}
+                                    {{#each attendeeList}}
+                                    <tr class="mail" id="delemail">
+
+                                        <th scope="row">
+                                            <input class="form-control " list="employeeList"
+                                                value="{{this.attendee.staffId}}" size="10" name="employees" required>
+
+                                            <datalist id="employeeList">
+                                                {{!-- 遍歷使用者陣列 --}}
+                                                {{#each ../users}}
+                                                <option value="{{this.staffId}}">{{this.name}}</option>
+                                                {{/each}}
+                                            </datalist>
+                                        </th>
+                                        <td>
+                                            {{!-- 第一個使用者不顯示刪除按鈕 --}}
+                                            {{#if this.isFirst}}
+                                            {{!-- <button type="button" class="btn btn-outline-danger btn-sm"
+                                                id="deleteemail">
+                                                <span aria-hidden="true">&#10006;</span>
+                                            </button> --}}
+                                            {{else}}
+                                            <button type="button" class="btn btn-outline-danger btn-sm deleteemail"
+                                                >
+                                                <span aria-hidden="true">&#10006;</span>
+                                            </button>
+                                            {{/if}}
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+
+                                    {{!-- 不是會議建立者->不可選擇要通知的人 --}}
+                                    {{else}}
+                                    <tr class="mail" id="delemail">
+                                        <th scope="row">
+                                            <input class="form-control " list="employeeList" name="employeeList"
+                                                value="{{this.attendee.staffId}}" size="10" required disabled>
+
+                                            <datalist id="employeeList">
+                                                {{#each ../users}}
+                                                <option value="{{this.staffId}}">{{this.name}}</option>
+                                                {{/each}}
+                                            </datalist>
+                                        </th>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    {{/if}}
+
+                                </tbody>
+                            </table>
+
+                            <div style="text-align:right;margin:2%">
+                                {{!-- 會議建立者可發送通知，判斷使用者身分 --}}
+                                {{#if identity.isOrganizer}}
+                                <button class="btn btn-outline-info" type="submit">通知</button>
+                                {{else}}
+                                <button class="btn btn-outline-info" type="submit" disabled>通知</button>
+                                {{/if}}
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- 刪除視窗 --}}
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="Check">刪除</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                確定要刪除這個會議嗎？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">否</button>
+                <a href="/delete?id={{confInfo._id}}" class="btn btn-primary">是</a>
+            </div>
+        </div>
+    </div>
+</div>

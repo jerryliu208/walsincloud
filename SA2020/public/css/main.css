@@ -1,0 +1,35 @@
+body {
+    background: #f10707;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  
+}
+
+header{margin-left: 1px;}
+
+.header-title {
+    transition-duration: 0.4s;
+}
+
+
+table tbody tr:hover {
+    background: #ecebeb;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: none;
+    transition-duration: 0.4s;
+}
+
+.th-item:hover {
+    color: #17a2b8;
+}
