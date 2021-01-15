@@ -190,7 +190,7 @@ function allowJoinMeeting(isChairSign, isRoomSign, startTime, endTime, meetingUR
 
 // 判斷//手機//參與者是否可以加入會議
 function allowJoinMeetingM(isChairSign, isRoomSign, startTime, endTime, meetingURL) {
-    var nowTime = new Date()
+    var USnowTime = new Date()
     var nowTime = USnowTime.setHours(confInfo.startTime.getHours()+8)
     var start = new Date(startTime)
     var end = new Date(endTime)
