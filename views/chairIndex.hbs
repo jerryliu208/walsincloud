@@ -92,7 +92,7 @@
                         <td  onclick="tableClick('{{this.confData._id}}')">{{{getSign this.confData.isRoomSign}}}</td>
                         {{!-- <td><span class="badge badge-danger">已簽核</span></td> --}}
                         <td>
-                            <form action="/url" method="POST" onsubmit="">
+                            <form action="/url" method="POST">
                                 <input id="urlText" type="hidden" name="URLTEXT" value="">
                                 <input id="conf_id" type="hidden" name="confID" value="{{this.confData._id}}">
                                 {{{allowCreatMeeting this.confData.isChairSign this.confData.isRoomSign this.confData.startTime this.confData.endTime}}}

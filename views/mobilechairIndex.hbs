@@ -54,7 +54,7 @@
 <div class="w3-panel w3-round-xlarge " style="padding:16px; border:5px solid #ccc; margin-left:3%; margin-right:3%">
     <div style="float: left;" class="w3-panel">
         <p style="font-size:55px; font-weight:bold;">{{this.confData.name}}
-            <form action="/url" method="POST" onsubmit="">
+            <form action="/url" method="POST">
                 <input id="urlText" type="hidden" name="URLTEXT" value="">
                 <input id="conf_id" type="hidden" name="confID" value="{{this.confData._id}}">
                 {{{allowCreatMeetingM this.confData.isChairSign this.confData.isRoomSign this.confData.startTime this.confData.endTime}}}

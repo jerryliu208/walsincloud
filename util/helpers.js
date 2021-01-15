@@ -111,7 +111,7 @@ function allowCreatMeeting(isChairSign, isRoomSign, startTime, endTime) {
     var start = new Date(startTime)
     var end = new Date(endTime)
     if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)) {
-        return `<button onclick="creatURL()" type="submit" class="btn btn-primary">開始會議</button>`
+        return `<button onclick="creatURL()" type="submit" class="btn btn-primary">待審核中</button>`
     }else if((isChairSign !== 1 || isRoomSign !== 1)&&(nowTime >= start && nowTime <= end)){
         return `<button onclick="creatURL()" disabled class="btn btn-primary">待審核中</button>`
     }else if(nowTime >= end){
