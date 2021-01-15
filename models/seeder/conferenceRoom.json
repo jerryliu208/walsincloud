@@ -2,35 +2,35 @@
         "name": "第一會議室",
         "location": "臺北市信義區松智路1號25樓011室",
         "accommodate": 50,
-        "managerId": "10611001",
+        "managerId": "1108888",
         "price": 500
     },
     {
         "name": "第二會議室",
         "location": "臺北市信義區松智路1號25樓022室",
         "accommodate": 30,
-        "managerId": "10413002",
+        "managerId": "1100101",
         "price": 300
     },
     {
         "name": "第三會議室",
         "location": "臺北市信義區松智路1號25樓033室",
         "accommodate": 35,
-        "managerId": "10616033",
+        "managerId": "1100102",
         "price": 350
     },
     {
         "name": "第四會議室",
         "location": "臺北市信義區松智路1號25樓044室",
         "accommodate": 40,
-        "managerId": "10616049",
+        "managerId": "1100103",
         "price": 400
     },
     {
         "name": "第五會議室",
         "location": "臺北市信義區松智路1號25樓055室",
         "accommodate": 55,
-        "managerId": "10616049",
+        "managerId": "1100201",
         "price": 550
     }
 ]
