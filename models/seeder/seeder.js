@@ -8,7 +8,7 @@ const userJson = require('./user.json')
 // 添加會員、會議室假資料到資料庫
 
 // mongoose.set('debug', true)
-mongoose.connect('mongodb://vincent-sa-db:oSggFdJu1o6dBXNfXdqgQW9YzQgO9g3HNCqYbhDrooKYpghEkdg78tWzc1deX6807eRu6nU7wdq7jBsfXTxc1w%3D%3D@vincent-sa-db.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@vincent-sa-db@', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://db-vincent-sa:nCbtMN9tnY1jqdIlLhwOt3t6p8f2nrquuS11wQ4jHd8h6kFuDwRMSaHDJJTcWdoAQiqRWWiOkPRajvJOxDnPrQ%3D%3D@db-vincent-sa.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@db-vincent-sa@', { useNewUrlParser: true, useUnifiedTopology: true })
 
 mongoose.connection.once('open', () => { // 連線成功
     console.log('資料庫連線成功！ mongodb://localhost/walsin-cloud')
