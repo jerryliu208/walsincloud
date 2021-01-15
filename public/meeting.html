@@ -12,29 +12,36 @@
         <script src='https://meet.jit.si/external_api.js'></script>
         <script src="js/meeting.js"></script>
         <script>
-            $(function(){
+            /*$(*/function join (){
                 const urlParams = new URLSearchParams(window.location.search);
-                
+                var title = document.getElementById("nicktitle");
+                var user = document.getElementById("username");
+                var nameBtn = document.getElementById("usernameBtn");
                 var meeting_id = urlParams.get('mid');
                 if (!meeting_id) {
                     alert('meeting id is missing');
                     return;
                 }
-                var dispNme = window.prompt('Enter your nick!');
-                if (!dispNme) {
+                var dispNme = user.value;
+                if (dispNme == "") {
                     dispNme = "New User";
                 }
-                
+                title.style.display = 'none';
+                user.style.display = 'none';
+                nameBtn.style.display = 'none';
                 $('#joinMsg').text('Joining...');
                 BindEvent();
                 StartMeeting(meeting_id,dispNme);
                 
-            });
+            }/*);*/
             
         </script>
     </head>
     <body>
         <div id='joinMsg'></div>
+        <h1 id="nicktitle">Enter your nick!</h1>
+        <input id="username" value="">
+        <button onclick="join()" id="usernameBtn">Enter</button>
         <div id='container' class="container" style="display:none;">
             <div id='jitsi-meet-conf-container'></div>
         </div>
