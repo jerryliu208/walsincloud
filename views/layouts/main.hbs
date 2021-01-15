@@ -20,7 +20,13 @@
 <body>
 
     {{!-- 標頭列 --}}
-    {{>header}}
+    <script type="text/javascript">
+            if( screen.width <= 500 || screen.height <= 600 ) {
+                document.write(`{{>mobileheader}}`)
+            }else{
+                document.write(`{{>header}}`)
+            }
+    </script>
 
     {{!-- 主要內容 --}}
     {{#if isAuthenticated}} {{!-- 有登入 --}}

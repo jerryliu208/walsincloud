@@ -15,5 +15,11 @@ function notAuthenticated(req, res, next) {
   }
   res.redirect('/')
 }
+function MnotAuthenticated(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return next()
+  }
+  res.redirect('/mobileindex')
+}
 
-module.exports = { ensureAuthenticated, notAuthenticated }
+module.exports = { ensureAuthenticated, notAuthenticated , MnotAuthenticated}

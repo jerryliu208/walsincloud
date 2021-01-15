@@ -119,6 +119,21 @@ function allowCreatMeeting(isChairSign, isRoomSign, startTime, endTime) {
     }
 }
 
+// //手機//判斷主持人是否可以創建會議
+function allowCreatMeetingM(isChairSign, isRoomSign, startTime, endTime) {
+    var nowTime = new Date()
+    var start = new Date(startTime)
+    var end = new Date(endTime)
+    if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)) {
+        return `<button onclick="creatURL()" type="submit" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">開始會議</button>`
+    }else if(nowTime >= end){
+        return `<button onclick="creatURL()" disabled class="w3-button w3-round-xlarge w3-blue w3-xxlarge">已過期</button>`
+    }
+    else {
+        return `<button onclick="creatURL()" disabled class="w3-button w3-round-xlarge w3-blue w3-xxlarge">待審核中</button>`
+    }
+}
+
 // 判斷會議是否可以編輯
 function allowEdit(isChairSign, isRoomSign, options) {
     if (((isChairSign === 0 || isChairSign === 2) && isRoomSign === 0) || (isChairSign === 1 && isRoomSign === 2)) {
@@ -165,5 +180,23 @@ function allowJoinMeeting(isChairSign, isRoomSign, startTime, endTime, meetingUR
     }
 }
 
+// 判斷//手機//參與者是否可以加入會議
+function allowJoinMeetingM(isChairSign, isRoomSign, startTime, endTime, meetingURL) {
+    var nowTime = new Date()
+    var start = new Date(startTime)
+    var end = new Date(endTime)
+    if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)&&(meetingURL !== undefined)) {
+        return (`<button onclick="location.href='`+meetingURL+`'" type="button" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">加入會議</button>`)
+    }else if(isChairSign !== 1 || isRoomSign !== 1){
+        return `<button disabled type="button" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">尚未簽核</button>`
+    }else if((nowTime <= start)||(meetingURL === undefined)){
+        return `<button disabled type="button" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">尚未開放</button>`
+    }else if(nowTime >= end){
+        return `<button disabled type="button" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">已過期</button>`
+    }else {
+        return `<button disabled type="button" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">加入會議</button>`
+    }
+}
 
-module.exports = { getAttendType, getAnotherType, getAttendMode, getSign, equal, allowChairSign, allowRoomSign, allowCreatMeeting, allowEdit, allowEditOther, allowChooseMode, allowJoinMeeting, whichNoticification}
+
+module.exports = { getAttendType, getAnotherType, getAttendMode, getSign, equal, allowChairSign, allowRoomSign, allowCreatMeeting, allowEdit, allowEditOther, allowChooseMode, allowJoinMeeting, whichNoticification, allowJoinMeetingM, allowCreatMeetingM}

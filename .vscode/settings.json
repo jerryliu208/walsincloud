@@ -3,6 +3,6 @@
         "node_modules{,/**}",
         ".vscode{,/**}"
     ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/50fe4307-8fc9-402d-806d-e4a8c92971f0/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/last-chance-appserver",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/50fe4307-8fc9-402d-806d-e4a8c92971f0/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/vincent-walsincloud"
 }

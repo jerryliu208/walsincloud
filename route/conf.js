@@ -13,6 +13,26 @@ const { getUnCheckNoti, getUsersRooms } = require('../handler/getUsual')
 
 const router = express.Router()
 
+// 手機會議列表
+router.get('/mobileindex', ensureAuthenticated, async (req, res) => {
+
+    console.log(req.session)
+    console.log('User', req.user)
+
+    const noticeNum = await getUnCheckNoti(req.user.staffId)
+    const { users, confRooms } = await getUsersRooms()
+    const confsData = await handleIndex(req.user)
+
+    res.render('mobileindex', {
+        name: req.user.name,
+        title: '會議列表',
+        confsData,
+        users,
+        noticeNum,
+        confRooms
+    })
+})
+
 // 會議列表
 router.get('/', ensureAuthenticated, async (req, res) => {
 
@@ -24,6 +44,23 @@ router.get('/', ensureAuthenticated, async (req, res) => {
     const confsData = await handleIndex(req.user)
 
     res.render('index', {
+        name: req.user.name,
+        title: '會議列表',
+        confsData,
+        users,
+        noticeNum,
+        confRooms
+    })
+})
+
+// //手機//主持會議列表
+router.get('/mobilechair', ensureAuthenticated, async (req, res) => {
+
+    const noticeNum = await getUnCheckNoti(req.user.staffId)
+    const { users, confRooms } = await getUsersRooms()
+    const confsData = await handleChairIndex(req.user)
+
+    res.render('mobilechairIndex', {
         name: req.user.name,
         title: '會議列表',
         confsData,
