@@ -92,10 +92,18 @@
                         <td  onclick="tableClick('{{this.confData._id}}')">{{{getSign this.confData.isRoomSign}}}</td>
                         {{!-- <td><span class="badge badge-danger">已簽核</span></td> --}}
                         <td>
-                            <form action="/url" method="POST">
+                            <form action="/url" method="POST" onsubmit="">
                                 <input id="urlText" type="hidden" name="URLTEXT" value="">
                                 <input id="conf_id" type="hidden" name="confID" value="{{this.confData._id}}">
+                                <script>
+                                    function creatURL(){
+                                        var murl = window.location.origin + "/meeting.html?mid=" +  (new Date()).getTime();
+                                        var URLinput = document.getElementById("urlText");
+                                        URLinput.value = murl;
+                                    }
+                                </script>
                                 {{{allowCreatMeeting this.confData.isChairSign this.confData.isRoomSign this.confData.startTime this.confData.endTime}}}
+                                
                             </form>
                         </td>
                     </tr>
@@ -112,13 +120,6 @@
     </div>
 </div>
 
-<script>
-    function creatURL(){
-        var murl = window.location.origin + "/meeting.html?mid=" +  (new Date()).getTime();
-        var URLinput = document.getElementById("urlText");
-        URLinput.value = murl;
-        window.location.assign(murl);
-    }
-</script>
+
 
 {{>newConfModal}}
