@@ -12,7 +12,7 @@
         <script src='https://meet.jit.si/external_api.js'></script>
         <script src="js/meeting.js"></script>
         <script>
-            /*$(*/function join (){
+            function join (){
                 const urlParams = new URLSearchParams(window.location.search);
                 var title = document.getElementById("nicktitle");
                 var user = document.getElementById("username");
@@ -33,7 +33,7 @@
                 BindEvent();
                 StartMeeting(meeting_id,dispNme);
                 
-            }/*);*/
+            }
             
         </script>
     </head>
