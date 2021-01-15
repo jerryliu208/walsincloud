@@ -106,7 +106,8 @@ function whichNoticification(check, mode, confId, name, sender, sendTime, _id) {
 
 // 判斷主持人是否可以創建會議
 function allowCreatMeeting(isChairSign, isRoomSign, startTime, endTime) {
-    var nowTime = new Date()
+    var USnowTime = new Date()
+    var nowTime = USnowTime.setHours(confInfo.startTime.getHours()+8)
     var start = new Date(startTime)
     var end = new Date(endTime)
     if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)) {
@@ -125,6 +126,7 @@ function allowCreatMeeting(isChairSign, isRoomSign, startTime, endTime) {
 // //手機//判斷主持人是否可以創建會議
 function allowCreatMeetingM(isChairSign, isRoomSign, startTime, endTime) {
     var nowTime = new Date()
+    var nowTime = USnowTime.setHours(confInfo.startTime.getHours()+8)
     var start = new Date(startTime)
     var end = new Date(endTime)
     if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)) {
@@ -170,6 +172,7 @@ function allowChooseMode(isChairSign, isRoomSign, options) {
 // 判斷參與者是否可以加入會議
 function allowJoinMeeting(isChairSign, isRoomSign, startTime, endTime, meetingURL) {
     var nowTime = new Date()
+    var nowTime = USnowTime.setHours(confInfo.startTime.getHours()+8)
     var start = new Date(startTime)
     var end = new Date(endTime)
     if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)&&(meetingURL !== "")) {
@@ -188,6 +191,7 @@ function allowJoinMeeting(isChairSign, isRoomSign, startTime, endTime, meetingUR
 // 判斷//手機//參與者是否可以加入會議
 function allowJoinMeetingM(isChairSign, isRoomSign, startTime, endTime, meetingURL) {
     var nowTime = new Date()
+    var nowTime = USnowTime.setHours(confInfo.startTime.getHours()+8)
     var start = new Date(startTime)
     var end = new Date(endTime)
     if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)&&(meetingURL !== undefined)) {
