@@ -117,6 +117,7 @@ function allowCreatMeeting(isChairSign, isRoomSign, startTime, endTime) {
         return `<button onclick="creatURL()" disabled class="btn btn-primary">已過期</button>`
     }
     else {
+        //
         return `<button onclick="creatURL()" disabled class="btn btn-primary">等待中</button>`
     }
 }
