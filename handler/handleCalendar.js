@@ -42,7 +42,7 @@ module.exports =async function handleCalendar(user) {
         TWendTime = moment(confInfo.endTime).format('YYYY-MM-DD'+"T"+'HH:mm:ss')
         
         data += `{
-            title: '參與"`+confInfo.name+`"',
+            title: '參與`+confInfo.name+`',
             start: '`+TWstartTime+`',
             end: '`+TWendTime+`'
         },`
@@ -59,7 +59,7 @@ module.exports =async function handleCalendar(user) {
         TWendTime = moment(confInfo.endTime).format('YYYY-MM-DD'+"T"+'HH:mm:ss')
         
         data += `{
-            title: '主持"`+confInfo.name+`"',
+            title: '主持`+confInfo.name+`',
             start: '`+TWstartTime+`',
             end: '`+TWendTime+`'
         },`
