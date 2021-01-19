@@ -221,7 +221,7 @@ router.post('/url', ensureAuthenticated, (req, res) => {
             console.log("會議舉辦在"+req.body.URLTEXT)
         } else {
         }
-        console.log(req.body.URLTEXT)
+        console.log(req.body)
         res.redirect(req.body.URLTEXT)
     })
 })

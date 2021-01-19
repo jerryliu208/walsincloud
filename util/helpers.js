@@ -105,39 +105,41 @@ function whichNoticification(check, mode, confId, name, sender, sendTime, _id) {
 }
 
 // 判斷主持人是否可以創建會議
-function allowCreatMeeting(isChairSign, isRoomSign, startTime, endTime) {
+function allowCreatMeeting(isChairSign, isRoomSign, startTime, endTime, confId) {
     var USnowTime = new Date()
     var nowTime = USnowTime.setHours(USnowTime.getHours()+8)
     var start = new Date(startTime)
     var end = new Date(endTime)
     if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)) {
-        return `<button onclick="creatURL()" type="submit" class="btn btn-primary">開始會議</button>`
+        return `<button onclick="creatURL('`+confId+`')" type="submit" class="btn btn-primary">開始會議</button>`
     }else if((isChairSign !== 1 || isRoomSign !== 1)&&(nowTime >= start && nowTime <= end)){
-        return `<button onclick="creatURL()" disabled class="btn btn-primary">待審核中</button>`
+        return `<button disabled class="btn btn-primary">待審核中</button>`
     }else if(nowTime >= end){
-        return `<button onclick="creatURL()" disabled class="btn btn-primary">已過期</button>`
+        return `<button disabled class="btn btn-primary">已過期</button>`
     }
     else {
         //
-        return `<button onclick="creatURL()" disabled class="btn btn-primary">等待中</button>`
+        return `<button disabled class="btn btn-primary">等待中</button>`
     }
 }
 
 // //手機//判斷主持人是否可以創建會議
-function allowCreatMeetingM(isChairSign, isRoomSign, startTime, endTime) {
+function allowCreatMeetingM(isChairSign, isRoomSign, startTime, endTime, confId) {
     var USnowTime = new Date()
     var nowTime = USnowTime.setHours(USnowTime.getHours()+8)
     var start = new Date(startTime)
     var end = new Date(endTime)
+    console.log(confId)
+    console.log("ID TEST")
     if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)) {
-        return `<button onclick="creatURL()" type="submit" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">開始會議</button>`
+        return `<button onclick="creatURL('`+confId+`')" type="submit" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">開始會議</button>`
     }else if((isChairSign !== 1 || isRoomSign !== 1)&&(nowTime >= start && nowTime <= end)){
-        return `<button onclick="creatURL()" disabled class="w3-button w3-round-xlarge w3-blue w3-xxlarge">待審核中</button>`
+        return `<button disabled class="w3-button w3-round-xlarge w3-blue w3-xxlarge">待審核中</button>`
     }else if(nowTime >= end){
-        return `<button onclick="creatURL()" disabled class="w3-button w3-round-xlarge w3-blue w3-xxlarge">已過期</button>`
+        return `<button disabled class="w3-button w3-round-xlarge w3-blue w3-xxlarge">已過期</button>`
     }
     else {
-        return `<button onclick="creatURL()" disabled class="w3-button w3-round-xlarge w3-blue w3-xxlarge">等待中</button>`
+        return `<button disabled class="w3-button w3-round-xlarge w3-blue w3-xxlarge">等待中</button>`
     }
 }
 

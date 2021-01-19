@@ -55,9 +55,9 @@
     <div style="float: left;" class="w3-panel">
         <p style="font-size:55px; font-weight:bold;">{{this.confData.name}}
             <form action="/url" method="POST">
-                <input id="urlText" type="hidden" name="URLTEXT" value="">
+                <input id="{{this.confData._id}}" type="hidden" name="URLTEXT" value="">
                 <input id="conf_id" type="hidden" name="confID" value="{{this.confData._id}}">
-                {{{allowCreatMeetingM this.confData.isChairSign this.confData.isRoomSign this.confData.startTime this.confData.endTime}}}
+                {{{allowCreatMeetingM this.confData.isChairSign this.confData.isRoomSign this.confData.startTime this.confData.endTime this.confData._id}}}
             </form>
         </P>
         <p  style="font-size:30px;">開始時間：{{this.confData.startTime}}</p>
@@ -98,11 +98,10 @@
 </div>
 
 <script>
-    function creatURL(){
+    function creatURL(id){
         var murl = window.location.origin + "/meeting.html?mid=" +  (new Date()).getTime();
-        var URLinput = document.getElementById("urlText");
+        var URLinput = document.getElementById(id);
         URLinput.value = murl;
-        window.location.assign(murl);
     }
 </script>
 

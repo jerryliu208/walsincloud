@@ -23,7 +23,8 @@
     "mongoose": "^5.11.8",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "window-location-origin": "^0.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

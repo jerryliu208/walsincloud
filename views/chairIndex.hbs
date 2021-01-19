@@ -93,16 +93,9 @@
                         {{!-- <td><span class="badge badge-danger">已簽核</span></td> --}}
                         <td>
                             <form action="/url" method="POST" onsubmit="">
-                                <input id="urlText" type="hidden" name="URLTEXT" value="">
-                                <input id="conf_id" type="hidden" name="confID" value="{{this.confData._id}}">
-                                <script>
-                                    function creatURL(){
-                                        var murl = window.location.origin + "/meeting.html?mid=" +  (new Date()).getTime();
-                                        var URLinput = document.getElementById("urlText");
-                                        URLinput.value = murl;
-                                    }
-                                </script>
-                                {{{allowCreatMeeting this.confData.isChairSign this.confData.isRoomSign this.confData.startTime this.confData.endTime}}}
+                                <input id="{{this.confData._id}}" type="hidden" name="URLTEXT" value="">
+                                <input class="conf_id" type="hidden" name="confID" value="{{this.confData._id}}">
+                                {{{allowCreatMeeting this.confData.isChairSign this.confData.isRoomSign this.confData.startTime this.confData.endTime this.confData._id}}}
                                 
                             </form>
                         </td>
@@ -120,6 +113,12 @@
     </div>
 </div>
 
-
+<script>
+    function creatURL(id){
+    var murl = window.location.origin + "/meeting.html?mid=" +  (new Date()).getTime();
+    var URLinput = document.getElementById(id);
+    URLinput.value = murl;
+    }
+</script>
 
 {{>newConfModal}}
