@@ -129,8 +129,6 @@ function allowCreatMeetingM(isChairSign, isRoomSign, startTime, endTime, confId)
     var nowTime = USnowTime.setHours(USnowTime.getHours()+8)
     var start = new Date(startTime)
     var end = new Date(endTime)
-    console.log(confId)
-    console.log("ID TEST")
     if ((isChairSign === 1 && isRoomSign === 1)&&(nowTime >= start && nowTime <= end)) {
         return `<button onclick="creatURL('`+confId+`')" type="submit" class="w3-button w3-round-xlarge w3-blue w3-xxlarge">開始會議</button>`
     }else if((isChairSign !== 1 || isRoomSign !== 1)&&(nowTime >= start && nowTime <= end)){
